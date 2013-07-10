@@ -1,0 +1,60 @@
+<html>
+<head>
+	<title>load</title>
+
+	<script src="jquery-1.7.js" type="text/javascript"></script>
+
+	<script type="text/javascript">
+	$(document).ready( function () {
+		$("#load").click( function(){
+			$('#conte').load('conte_load.html');
+
+			
+		});
+		$('#cargando').ajaxStart(function()	{
+			$(this).show();
+		}).ajaxStop(function() {
+			$(this).hide();
+			});
+		$("#clear").click(function(){
+			$("#conte").text("");
+		});
+
+		$('#letra-b .boton').click(function(){
+			$.getJSON('b.json');
+		});	
+		
+		
+	})
+	</script>
+	<style type="text/css">
+	.conte {
+		position: relative;
+		width: 200px;
+		height: auto;
+		background: :#f33;
+	}
+	#cargando{
+		position: absolute;
+		background: rgb(221, 236, 223);
+		color: rgb(128, 123, 123);
+		top: 13px;
+		left: 120px;
+		display: none;
+	}
+	</style>
+</head>
+
+<body>
+
+
+	<button  id="load">load </button>
+	<button  id="clear">Clear </button>
+	<div id="cargando">Cargando...</div>
+<div id="conte"></div>
+<div id="letra-b">B
+	<div class="boton">cargar</div>
+</div> 
+<div id="diccionario"></div>
+</body>
+</html>
