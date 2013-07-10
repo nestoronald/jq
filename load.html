@@ -1,9 +1,10 @@
 <html>
 <head>
 	<title>load</title>
+	<link rel="stylesheet" href="http://blueimp.github.io/cdn/css/bootstrap.min.css">
+ <link rel="stylesheet" href="http://blueimp.github.io/cdn/css/bootstrap-responsive.min.css">
 
 	<script src="jquery-1.7.js" type="text/javascript"></script>
-
 	<script type="text/javascript">
 	$(document).ready( function () {
 		$("#load").click( function(){
@@ -20,13 +21,37 @@
 			$("#conte").text("");
 		});
 
-		$('#letra-b .boton').click(function(){
-			$.getJSON('b.json');
+		$('#letra-b div.boton').click(function(){
+			$.getJSON('b.json', function(data){
+				$('#letra-b div.boton').css("display","none");
+				$('#letra-b div.clear').css("display","inline-block");
+
+				$('#diccionario').html("");
+				var c ="";
+				c += "<h1 id='title'>";
+				c += data.termino;
+				c += "</h1>";
+				c += "<div id='def'>";
+				c += data.definicion;
+				c += "</div>";
+			//	alert(c);
+			$('#diccionario').html(c);
+
+			});
+			
+			
 		});	
+		$('#letra-b div.clear').click(function(){
+			$('#diccionario').html("");
+			$(this).css("display","none");
+			$('#letra-b div.boton').css("display","inline-block");
+		});
 		
 		
 	})
 	</script>
+	
+
 	<style type="text/css">
 	.conte {
 		position: relative;
@@ -53,8 +78,11 @@
 	<div id="cargando">Cargando...</div>
 <div id="conte"></div>
 <div id="letra-b">B
-	<div class="boton">cargar</div>
+	<div class="boton btn btn-info icon-search" >Buscar</div>
+	<div class="clear btn btn-danger" style="display:none">Clear</div>
 </div> 
 <div id="diccionario"></div>
+
+
 </body>
 </html>
